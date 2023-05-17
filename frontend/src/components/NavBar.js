@@ -1,22 +1,47 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Outlet, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { COLORS } from './Colors';
 
 const Container = styled.div`
   display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 15vh;
+  background-color: ${COLORS.darkbrown};
+`;
+
+const InnerContainer = styled.div`
+  display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
+  width: 95%;
+  height: 57%;
+  margin: auto;
+  border-radius: 30px;
+  background-color: ${COLORS.white};
+  font-size: 40px;
+  font-weight: bold;
+  text-decoration: none;
+  color: ${COLORS.black};
+  /* text-align: center; */
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${COLORS.black};
 `;
 
 const NavBar = () => {
   return (
-    <>
-      <Container>
-        <p>สนับสนุนโดยธาตุทองซาวด์</p>
-        <Link to={`/`}>Home</Link>
-        <Link to={`/about`}>About</Link>
-      </Container>
-    </>
+    <Container>
+      <InnerContainer>
+        <StyledLink to={`/`}>สนับสนุนโดยธาตุทองซาวด์</StyledLink>
+        <StyledLink to={`/`}>Home</StyledLink>
+        <StyledLink to={`/about`}>About</StyledLink>
+      </InnerContainer>
+    </Container>
   );
 };
 
