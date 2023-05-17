@@ -23,7 +23,7 @@ const InnerContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   width: 95%;
-  height: 57%;
+  height: 65%;
   margin: auto;
   border-radius: 30px;
   background-color: ${COLORS.white};
@@ -35,7 +35,7 @@ const InnerContainer = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  text-decoration: none;
+  text-decoration: underline;
   color: ${COLORS.black};
 `;
 
