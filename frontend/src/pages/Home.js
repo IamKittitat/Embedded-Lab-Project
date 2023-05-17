@@ -4,14 +4,13 @@ import SideBar from '../components/SideBar';
 import StatusContainer from '../components/StatusContainer';
 
 const Home = () => {
-    return (
-        <>
-            <Navbar/>
-            <SideBar/>
-            <StatusContainer/>
-      
-        </>
-    )
-}
+  return (
+    <>
+      <Navbar />
+      <SideBar />
+      <StatusContainer />
+    </>
+  );
+};
 
 export default Home;
