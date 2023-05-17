@@ -3,6 +3,12 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { COLORS } from './Colors';
 
+const GroupName = styled(Link)`
+  font-family: 'Prompt', sans-serif;
+  text-decoration: none;
+  color: ${COLORS.black};
+`;
+
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -37,7 +43,7 @@ const NavBar = () => {
   return (
     <Container>
       <InnerContainer>
-        <StyledLink to={`/`}>สนับสนุนโดยธาตุทองซาวด์</StyledLink>
+        <GroupName to={`/`}>สนับสนุนโดยธาตุทองซาวด์</GroupName>
         <StyledLink to={`/`}>Home</StyledLink>
         <StyledLink to={`/about`}>About</StyledLink>
       </InnerContainer>
