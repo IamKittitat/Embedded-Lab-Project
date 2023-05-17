@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Outlet, Link } from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -12,8 +13,8 @@ const NavBar = () => {
         <>
             <Container>
                 <p>สนับสนุนโดยธาตุทองซาวด์</p>
-                <p>Home</p>
-                <p>About</p>
+                <Link to={`/`}>Home</Link>
+                <Link to={`/about`}>About</Link>
             </Container>
         </>
     )
