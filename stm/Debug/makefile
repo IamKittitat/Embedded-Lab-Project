@@ -34,34 +34,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := rodnum
+BUILD_ARTIFACT_NAME := stm
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-rodnum.elf \
+stm.elf \
 
 MAP_FILES += \
-rodnum.map \
+stm.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-rodnum.list \
+stm.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: rodnum.elf secondary-outputs
+main-build: stm.elf secondary-outputs
 
 # Tool invocations
-rodnum.elf rodnum.map: $(OBJS) $(USER_OBJS) /Users/wagyu/STM32CubeIDE/workspace_1.11.0/rodnum/STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "rodnum.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/wagyu/STM32CubeIDE/workspace_1.11.0/rodnum/STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="rodnum.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+stm.elf stm.map: $(OBJS) $(USER_OBJS) /Users/wagyu/STM32CubeIDE/Embedded-Lab-Project/stm/STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "stm.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/wagyu/STM32CubeIDE/Embedded-Lab-Project/stm/STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -70,14 +70,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-rodnum.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "rodnum.list"
+stm.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "stm.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) default.size.stdout rodnum.elf rodnum.list rodnum.map
+	-$(RM) default.size.stdout stm.elf stm.list stm.map
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
