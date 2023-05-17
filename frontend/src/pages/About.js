@@ -3,6 +3,7 @@ import Navbar from '../components/NavBar';
 import styled from 'styled-components';
 import { COLORS } from '../components/Colors';
 import MemberCard from '../components/MemberCard';
+import ParameterCard from '../components/ParameterCard';
 
 const Container = styled.div`
   display: flex;
@@ -82,7 +83,14 @@ const ParameterContainer = styled.div`
   border: 3px solid black;
 `;
 
-const ParameterInnerContainer = styled.div``;
+const ParameterInnerContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+`;
 
 const About = () => {
   return (
@@ -137,10 +145,32 @@ const About = () => {
           <ParameterContainer>
             <Topic>PARAMETER INFORMATION</Topic>
             <ParameterInnerContainer>
-              <p>one</p>
-              <p>two</p>
-              <p>three</p>
-              <p>four</p>
+              <ParameterCard
+                topic={'Soil Moisture'}
+                detail={'Refers to the amount of water present in the soil'}
+                recommend={'41% - 80%'}
+              />
+              <ParameterCard
+                topic={'Relative Humidity'}
+                detail={
+                  'Refers to the amount of moisture present in the air compared to the maximum amount the air can hold at a specific temperature'
+                }
+                recommend={'60% - 80%'}
+              />
+              <ParameterCard
+                topic={'Temperature'}
+                detail={
+                  'Refers to the measure of the heat energy present in the surrounding air'
+                }
+                recommend={'24°C - 43°C'}
+              />
+              <ParameterCard
+                topic={'Light Intensity'}
+                detail={
+                  'Refers to the amount of light energy that reach to plant'
+                }
+                recommend={'At least 60,000 Lux'}
+              />
             </ParameterInnerContainer>
           </ParameterContainer>
         </DetailContainer>
