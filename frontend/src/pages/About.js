@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from '../components/NavBar';
 import styled from 'styled-components';
 import { COLORS } from '../components/Colors';
-
 import MemberCard from '../components/MemberCard';
 
 const Container = styled.div`
@@ -23,7 +22,7 @@ const MemberContainer = styled.div`
 const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: space-evenly;
   align-items: center;
   width: 85%;
   height: 93%;
@@ -33,7 +32,7 @@ const InnerContainer = styled.div`
 `;
 
 const Member = styled.p`
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 50px;
   font-weight: 700;
   text-decoration: underline;
@@ -94,22 +93,26 @@ const About = () => {
           <InnerContainer>
             <Member>MEMBER</Member>
             <MemberCard
-              name={'Kanawat Vilasri'}
+              img={require('../images/6430001121.jpg')}
+              name={'Kanawat V.'}
               id={6430001121}
               role={'STM32'}
             />
             <MemberCard
-              name={'Kittitat Tuntisak'}
+              img={require('../images/6431304521.jpg')}
+              name={'Kittitat T.'}
               id={6431304521}
-              role={'Frontend Developer'}
+              role={'Frontend'}
             />
             <MemberCard
-              name={'Thamon Nantasen'}
+              img={require('../images/6431313121.jpg')}
+              name={'Thamon N.'}
               id={6431313121}
               role={'MCUV2 NETPIE'}
             />
             <MemberCard
-              name={'Naphat Wareesawetsuwan'}
+              img={require('../images/6431315421.jpg')}
+              name={'Naphat W.'}
               id={6431315421}
               role={'UX/UI Designer'}
             />
