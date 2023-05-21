@@ -106,7 +106,7 @@ uint8_t Rh_byte1, Rh_byte2, Temp_byte1, Temp_byte2;
 uint16_t SUM, RH, TEMP;
 
 float Temperature = 0;
-float Humidity = 0;
+float AirHumidity = 0;
 uint8_t Presence = 0;
 
 void Set_Pin_Output (GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
@@ -285,6 +285,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   char strval[100];
+  float SoilHumidity;
 
   HAL_TIM_Base_Start(&htim1);
 
@@ -355,9 +356,13 @@ int main(void)
 	RH = Rh_byte1;
 
 	Temperature = (float) TEMP;
-	Humidity = (float) RH;
+	AirHumidity = (float) RH;
 
-	sprintf(strval, "temp=%d\thumid=%d\r\n",(int)Temperature, (int)Humidity);
+	sprintf(strval, "temp=%d\thumid=%d\r\n",(int)Temperature, (int)AirHumidity);
+	HAL_UART_Transmit(&huart2, strval, strlen(strval), 100);
+
+	// SENT:SoilHumidity,AirHumidity,Temperature,LDR
+	sprintf(strval, "SENT:%d,%d,%d,%d",(int)SoilHumidity,(int)AirHumidity,(int)Temperature,(int)adcval);
 	HAL_UART_Transmit(&huart2, strval, strlen(strval), 100);
 
 	HAL_Delay(1000);
