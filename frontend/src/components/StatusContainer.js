@@ -32,7 +32,12 @@ const StatusDiv = styled.div`
 `;
 
 const Container = styled.div`
-  background-color: ${COLORS.lightgreen};
+  background-color: ${(props) =>
+    props.status === STATUS.PERFECT
+      ? COLORS.lightgreen
+      : props.status === STATUS.PROCESS
+      ? COLORS.lightblue
+      : COLORS.lightred};
   width: 73%;
   height: 85vh;
 `;
@@ -47,7 +52,7 @@ const StatusContainer = ({
   const refreshPage = () => window.location.reload();
 
   return (
-    <Container>
+    <Container status={status}>
       <TopicContainer>
         <Topic>PARAMETER</Topic>
         <ReactSVG
