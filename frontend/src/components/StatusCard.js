@@ -41,8 +41,8 @@ const Data = styled.p`
 
 const Unit = styled.p`
   position: relative;
-  top: 70px;
-  right: 5px;
+  top: 80px;
+  left: 325px;
   font-size: 30px;
   font-weight: 700;
   line-height: 36px;
@@ -59,9 +59,9 @@ const StatusCard = ({ icon, data, name, status, unit }) => {
   return (
     <Container>
       <InnerContainer status={status}>
+        <Unit>{unit}</Unit>
         <ReactSVG src={icon} style={{ marginLeft: '30px' }} />
         <Data>{data}</Data>
-        <Unit>{unit}</Unit>
       </InnerContainer>
       <Name>{name}</Name>
     </Container>
