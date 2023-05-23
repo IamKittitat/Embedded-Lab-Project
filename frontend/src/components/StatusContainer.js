@@ -1,7 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import StatusCard from './StatusCard';
+import RefreshIcon from '../icon/Refresh.svg';
+import { ReactSVG } from 'react-svg';
 import { COLORS } from './Colors';
+
+const TopicContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+`;
 
 const Topic = styled.p`
   margin-left: 10px;
@@ -26,9 +35,18 @@ const Container = styled.div`
 `;
 
 const StatusContainer = ({ status }) => {
+  const refreshPage = () => window.location.reload();
+
   return (
     <Container>
-      <Topic>PARAMETER</Topic>
+      <TopicContainer>
+        <Topic>PARAMETER</Topic>
+        <ReactSVG
+          src={RefreshIcon}
+          onClick={refreshPage}
+          style={{ cursor: 'pointer', marginTop: '20px', marginLeft: '10px' }}
+        />
+      </TopicContainer>
       <StatusDiv>
         <StatusCard icon="SOILMOISTURE" data="40.3" name="soil moisture" />
         <StatusCard icon="AIRMOISTURE" data="50.3" name="soil temperature" />
