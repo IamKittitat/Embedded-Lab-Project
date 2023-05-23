@@ -10,15 +10,23 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: ${COLORS.lightgreen2};
+  background-color: ${(props) =>
+    props.status === STATUS.PERFECT
+      ? COLORS.lightgreen2
+      : props.status === STATUS.PROCESS
+      ? COLORS.lightblue2
+      : COLORS.lightred2};
   width: 27%;
   height: 85vh;
 `;
 
 const SideBar = ({ status }) => {
   return (
-    <Container>
+    <Container status={status}>
       <SideDetail status={status} />
+      {/* <SideDetail status={'Warning'} /> */}
+      {/* <SideDetail status={'Perfect'} /> */}
+      {/* <SideDetail status={'Processing'} /> */}
       <SideStatus status={status} />
     </Container>
   );

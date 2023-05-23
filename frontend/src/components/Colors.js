@@ -12,7 +12,7 @@ export const COLORS = {
   red: 'rgba(204, 75, 75, 0.6);',
   darkred: '#CC4B4B',
   lightblue: '#B9CFE4',
-  lightblue2: '#ADCDEB',
+  lightblue2: 'rgba(173, 205, 235, 0.76);',
   blue: 'rgba(75, 142, 204, 0.6);',
   darkblue: '#4B8ECC',
   white: '#FFFFFF',
