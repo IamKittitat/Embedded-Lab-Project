@@ -3,11 +3,17 @@ import styled from 'styled-components';
 import { STATUS } from '../util/Status';
 import { COLORS } from './Colors';
 
-const Perfect = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${COLORS.darkgreen};
+  background-color: ${(props) =>
+    props.status === STATUS.PERFECT
+      ? COLORS.darkgreen
+      : props.status === STATUS.PROCESS
+      ? COLORS.darkblue
+      : COLORS.darkred};
+
   color: ${COLORS.white};
   width: 305px;
   height: 40%;
@@ -22,11 +28,11 @@ const SideDetail = ({ status }) => {
   return (
     <>
       {status === STATUS.PERFECT ? (
-        <Perfect>Everything is Perfect!</Perfect>
+        <Container status={status}>Everything is Perfect!</Container>
       ) : status === STATUS.WARNING ? (
-        <div>WARNING</div>
+        <Container status={status}>WARNING</Container>
       ) : (
-        <div>PROCESS</div>
+        <Container status={status}>PROCESS</Container>
       )}
     </>
   );

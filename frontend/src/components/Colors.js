@@ -9,12 +9,12 @@ export const COLORS = {
   lightred: '#E8977D',
   lightred2: '#EBC3AD',
   lightred3: '#CC704B', // Use in Member Container
-  red: '#D87B72',
-  darkred: 'rgba(204, 75, 75, 0.6);',
+  red: 'rgba(204, 75, 75, 0.6);',
+  darkred: '#CC4B4B',
   lightblue: '#B9CFE4',
   lightblue2: '#ADCDEB',
-  blue: '#7AACDA',
-  darkblue: 'rgba(75, 142, 204, 0.6);',
+  blue: 'rgba(75, 142, 204, 0.6);',
+  darkblue: '#4B8ECC',
   white: '#FFFFFF',
   black: '#000000',
 };

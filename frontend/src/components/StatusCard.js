@@ -24,8 +24,8 @@ const InnerContainer = styled.div`
     props.status === STATUS.PERFECT
       ? COLORS.green
       : props.status === STATUS.PROCESS
-      ? COLORS.darkblue
-      : COLORS.darkred};
+      ? COLORS.blue
+      : COLORS.red};
 `;
 
 const Data = styled.p`
@@ -59,7 +59,7 @@ const StatusCard = ({ icon, data, name, status, unit }) => {
   return (
     <Container>
       <InnerContainer status={status}>
-        <ReactSVG src={icon} style={{ marginLeft: '10px' }} />
+        <ReactSVG src={icon} style={{ marginLeft: '30px' }} />
         <Data>{data}</Data>
         <Unit>{unit}</Unit>
       </InnerContainer>
