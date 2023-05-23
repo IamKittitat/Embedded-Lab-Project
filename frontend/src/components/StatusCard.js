@@ -29,10 +29,10 @@ const InnerContainer = styled.div`
 `;
 
 const Data = styled.p`
-  margin-left: 20px;
+  position: relative;
+  left: 150px;
   font-size: 70px;
   font-weight: 900;
-  line-height: 85px;
   text-align: center;
   text-shadow: -2px 0px 0px black, 2px 0px 0px black, 0px -2px 0px black,
     0px 2px 0px black;
@@ -42,7 +42,7 @@ const Data = styled.p`
 const Unit = styled.p`
   position: relative;
   top: 80px;
-  left: 325px;
+  left: 150px;
   font-size: 30px;
   font-weight: 700;
   line-height: 36px;
@@ -51,17 +51,15 @@ const Unit = styled.p`
 const Name = styled.p`
   font-size: 30px;
   font-weight: 700;
-  line-height: 36px;
-  text-align: center;
 `;
 
 const StatusCard = ({ icon, data, name, status, unit }) => {
   return (
     <Container>
       <InnerContainer status={status}>
-        <Unit>{unit}</Unit>
-        <ReactSVG src={icon} style={{ marginLeft: '30px' }} />
         <Data>{data}</Data>
+        <Unit>{unit}</Unit>
+        <ReactSVG src={icon} style={{ position: 'absolute' }} />
       </InnerContainer>
       <Name>{name}</Name>
     </Container>
