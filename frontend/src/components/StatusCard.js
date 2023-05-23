@@ -54,14 +54,21 @@ const Name = styled.p`
 `;
 
 const StatusCard = ({ icon, data, name, status, unit }) => {
+  function kFormatter(num) {
+    return Math.abs(num) > 999
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'k'
+      : num.toFixed(2);
+  }
+
   return (
     <Container>
       <InnerContainer status={status}>
-        <Data>{data}</Data>
-        <Unit>{unit}</Unit>
+        <Data>{kFormatter(data)}</Data>
         <ReactSVG src={icon} style={{ position: 'absolute' }} />
       </InnerContainer>
-      <Name>{name}</Name>
+      <Name>
+        {name} ({unit})
+      </Name>
     </Container>
   );
 };
