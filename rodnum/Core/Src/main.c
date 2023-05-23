@@ -93,6 +93,20 @@ void ADC_Select_CH1 (void)
 	  }
 }
 
+void ADC_Select_CH4 (void)
+{
+	ADC_ChannelConfTypeDef sConfig = {0};
+	  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+	  */
+	  sConfig.Channel = ADC_CHANNEL_4;
+	  sConfig.Rank = 1;
+	  sConfig.SamplingTime = ADC_SAMPLETIME_84CYCLES;
+	  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+	  {
+	    Error_Handler();
+	  }
+}
+
 /*********************************** DHT11 FUNCTIONS ********************************************/
 
 void delay (uint16_t time)
@@ -108,6 +122,9 @@ uint16_t SUM, RH, TEMP;
 float Temperature = 0;
 float AirHumidity = 0;
 uint8_t Presence = 0;
+
+float SoilHumidity;
+int Water;
 
 void Set_Pin_Output (GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
 {
@@ -136,7 +153,7 @@ void DHT11_Start (void)
 	Set_Pin_Output (DHT11_PORT, DHT11_PIN);  // set the pin as output
 	HAL_GPIO_WritePin (DHT11_PORT, DHT11_PIN, 0);   // pull the pin low
 	delay (18000);   // wait for 18ms
-  HAL_GPIO_WritePin (DHT11_PORT, DHT11_PIN, 1);   // pull the pin high
+	HAL_GPIO_WritePin (DHT11_PORT, DHT11_PIN, 1);   // pull the pin high
 	delay (20);   // wait for 20us
 	Set_Pin_Input(DHT11_PORT, DHT11_PIN);    // set as input
 }
@@ -285,7 +302,6 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   char strval[100];
-  float SoilHumidity;
 
   HAL_TIM_Base_Start(&htim1);
 
@@ -311,6 +327,18 @@ int main(void)
     }
     HAL_ADC_Stop(&hadc1);
     sprintf(strval, "LDR=%d\r\n",(int)adcval);
+    HAL_UART_Transmit(&huart2, strval, strlen(strval), 100);
+
+    // Sensor Soil
+    ADC_Select_CH4();
+    HAL_ADC_Start(&hadc1);
+
+    if(HAL_ADC_PollForConversion(&hadc1, 1000) == HAL_OK)
+    {
+      SoilHumidity = HAL_ADC_GetValue(&hadc1);
+    }
+    HAL_ADC_Stop(&hadc1);
+    sprintf(strval, "Soil=%d\r\n",(int)SoilHumidity);
     HAL_UART_Transmit(&huart2, strval, strlen(strval), 100);
 
     // Sensor DHT11 (Humidity and Temperature)
@@ -358,12 +386,16 @@ int main(void)
 	Temperature = (float) TEMP;
 	AirHumidity = (float) RH;
 
-	sprintf(strval, "temp=%d\thumid=%d\r\n",(int)Temperature, (int)AirHumidity);
+	sprintf(strval, "Temp=%d\tHumid=%d\r\n",(int)Temperature, (int)AirHumidity);
 	HAL_UART_Transmit(&huart2, strval, strlen(strval), 100);
 
 	// SENT:SoilHumidity,AirHumidity,Temperature,LDR
-	sprintf(strval, "SENT:%d,%d,%d,%d",(int)SoilHumidity,(int)AirHumidity,(int)Temperature,(int)adcval);
-	HAL_UART_Transmit(&huart2, strval, strlen(strval), 100);
+//	sprintf(strval, "SENT:%d,%d,%d,%d",(int)SoilHumidity,(int)AirHumidity,(int)Temperature,(int)adcval);
+//	HAL_UART_Transmit(&huart2, strcat(strval, "\r\n"), strlen(strval), 100);
+
+	// msg format
+	sprintf(strval, "%d|%d|%d|%d|%d",(int)adcval,(int)Temperature,(int)AirHumidity,(int)SoilHumidity,(int)Water);
+	HAL_UART_Transmit(&huart2, strcat(strval, "\r\n"), strlen(strval), 100);
 
 	HAL_Delay(1000);
     /* USER CODE END WHILE */
@@ -448,7 +480,7 @@ static void MX_ADC1_Init(void)
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.NbrOfConversion = 3;
+  hadc1.Init.NbrOfConversion = 2;
   hadc1.Init.DMAContinuousRequests = DISABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
@@ -468,15 +500,8 @@ static void MX_ADC1_Init(void)
 
   /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
   */
+  sConfig.Channel = ADC_CHANNEL_4;
   sConfig.Rank = 2;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-  */
-  sConfig.Rank = 3;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
