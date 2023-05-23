@@ -51,7 +51,10 @@ const SideStatus = ({ status, client }) => {
           <ReactSVG src={ProcessIcon} />
         </Container>
       )}
-      <FillWater onClick={waterHandler}>Watering Plant</FillWater>
+      {/* <FillWater onClick={waterHandler}>Watering Plant</FillWater> */}
+      <FillWater onClick={waterHandler}>
+        {status === STATUS.PROCESS ? 'Watering...' : 'Watering Plant'}
+      </FillWater>
     </>
   );
 };
