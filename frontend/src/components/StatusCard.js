@@ -29,41 +29,37 @@ const InnerContainer = styled.div`
 `;
 
 const Data = styled.p`
-  margin-left: 20px;
+  position: relative;
+  left: 150px;
   font-size: 70px;
   font-weight: 900;
-  line-height: 85px;
   text-align: center;
   text-shadow: -2px 0px 0px black, 2px 0px 0px black, 0px -2px 0px black,
     0px 2px 0px black;
   color: ${COLORS.white};
 `;
 
-const Unit = styled.p`
-  position: relative;
-  top: 80px;
-  left: 325px;
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 36px;
-`;
-
 const Name = styled.p`
   font-size: 30px;
   font-weight: 700;
-  line-height: 36px;
-  text-align: center;
 `;
 
 const StatusCard = ({ icon, data, name, status, unit }) => {
+  function kFormatter(num) {
+    return Math.abs(num) > 999
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'k'
+      : num.toFixed(2);
+  }
+
   return (
     <Container>
       <InnerContainer status={status}>
-        <Unit>{unit}</Unit>
-        <ReactSVG src={icon} style={{ marginLeft: '30px' }} />
-        <Data>{data}</Data>
+        <Data>{kFormatter(data)}</Data>
+        <ReactSVG src={icon} style={{ position: 'absolute' }} />
       </InnerContainer>
-      <Name>{name}</Name>
+      <Name>
+        {name} ({unit})
+      </Name>
     </Container>
   );
 };

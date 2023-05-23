@@ -169,7 +169,7 @@ const About = () => {
                 detail={
                   'Refers to the amount of light energy that reach to plant'
                 }
-                recommend={'At least 60,000 Lux'}
+                recommend={'-'}
               />
             </ParameterInnerContainer>
           </ParameterContainer>
