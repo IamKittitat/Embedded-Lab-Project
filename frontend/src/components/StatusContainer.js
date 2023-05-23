@@ -38,7 +38,13 @@ const Container = styled.div`
   height: 85vh;
 `;
 
-const StatusContainer = ({ status }) => {
+const StatusContainer = ({
+  status,
+  soilMoisture,
+  humidity,
+  temperature,
+  lightIntensity,
+}) => {
   const refreshPage = () => window.location.reload();
 
   return (
@@ -54,28 +60,28 @@ const StatusContainer = ({ status }) => {
       <StatusDiv>
         <StatusCard
           icon={SoilMoisture}
-          data="40.3"
-          name="soil moisture"
+          data={soilMoisture}
+          name="Soil Moisture"
           status={status}
           unit="%"
         />
         <StatusCard
           icon={Humidity}
-          data="50.3"
-          name="soil temperature"
+          data={humidity}
+          name="Relative Humidity"
           status={status}
           unit="%"
         />
         <StatusCard
           icon={Temperature}
-          data="60.3"
-          name="temperature"
+          data={temperature}
+          name={'Temperature'}
           status={status}
           unit="°C"
         />
         <StatusCard
           icon={LightIntensity}
-          data="70.3"
+          data={lightIntensity}
           name="Light Intensity"
           status={status}
           unit="Lux"
