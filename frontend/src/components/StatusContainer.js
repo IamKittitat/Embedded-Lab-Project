@@ -12,7 +12,6 @@ import { COLORS } from './Colors';
 const TopicContainer = styled.div`
   display: flex;
   flex-direction: row;
-  /* justify-content: center; */
   align-items: center;
 `;
 
@@ -29,7 +28,6 @@ const StatusDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  /* align-items: center; */
 `;
 
 const Container = styled.div`
