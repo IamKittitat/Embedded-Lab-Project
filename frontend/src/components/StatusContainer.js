@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import StatusCard from './StatusCard';
 import RefreshIcon from '../icon/Refresh.svg';
+import Humidity from '../icon/Humidity.svg';
+import LightIntensity from '../icon/LightIntensity.svg';
+import SoilMoisture from '../icon/SoilMoisture.svg';
+import Temperature from '../icon/Temperature.svg';
 import { ReactSVG } from 'react-svg';
 import { COLORS } from './Colors';
 
@@ -48,10 +52,34 @@ const StatusContainer = ({ status }) => {
         />
       </TopicContainer>
       <StatusDiv>
-        <StatusCard icon="SOILMOISTURE" data="40.3" name="soil moisture" />
-        <StatusCard icon="AIRMOISTURE" data="50.3" name="soil temperature" />
-        <StatusCard icon="TEMP" data="60.3" name="temperature" />
-        <StatusCard icon="LIGHT" data="70.3" name="Light Intensity" />
+        <StatusCard
+          icon={SoilMoisture}
+          data="40.3"
+          name="soil moisture"
+          status={status}
+          unit="%"
+        />
+        <StatusCard
+          icon={Humidity}
+          data="50.3"
+          name="soil temperature"
+          status={status}
+          unit="%"
+        />
+        <StatusCard
+          icon={Temperature}
+          data="60.3"
+          name="temperature"
+          status={status}
+          unit="°C"
+        />
+        <StatusCard
+          icon={LightIntensity}
+          data="70.3"
+          name="Light Intensity"
+          status={status}
+          unit="Lux"
+        />
       </StatusDiv>
     </Container>
   );
