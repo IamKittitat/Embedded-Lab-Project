@@ -27,28 +27,7 @@ const Text = styled.p`
   text-align: center;
 `;
 
-const FillWater = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 67px;
-  width: 245px;
-  border: 3px solid #000000;
-  border-radius: 100px;
-  background-color: #409bce;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 24px;
-  letter-spacing: 0em;
-  text-align: center;
-  color: ${COLORS.white};
-  cursor: pointer;
-`;
-
 const SideDetail = ({ status }) => {
-  const waterHandler = () => {
-    alert('Watering Plant');
-  };
   return (
     <>
       {status === STATUS.PERFECT ? (
@@ -58,7 +37,6 @@ const SideDetail = ({ status }) => {
       ) : status === STATUS.WARNING ? (
         <Container status={status}>
           <Text>WARNING!!</Text>
-          <FillWater onClick={waterHandler}>Watering Plant</FillWater>
         </Container>
       ) : (
         <Container status={status}>

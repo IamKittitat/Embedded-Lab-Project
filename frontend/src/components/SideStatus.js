@@ -14,32 +14,28 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const InnerContainer = styled.div`
+const FillWater = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
-  height: 80px;
-  width: 305px;
-  border-radius: 30px;
-  background-color: ${(props) =>
-    props.status === STATUS.PERFECT
-      ? COLORS.green
-      : props.status === STATUS.PROCESS
-      ? COLORS.blue
-      : COLORS.red};
-`;
-
-const Text = styled.p`
-  font-size: 30px;
+  height: 67px;
+  width: 245px;
+  border: 3px solid #000000;
+  border-radius: 100px;
+  background-color: #409bce;
+  font-size: 20px;
   font-weight: 700;
-  line-height: 36px;
+  line-height: 24px;
+  letter-spacing: 0em;
   text-align: center;
-  color: black;
+  color: ${COLORS.white};
+  cursor: pointer;
 `;
 
 const SideStatus = ({ status }) => {
+  const waterHandler = () => {
+    alert('Watering Plant');
+  };
   return (
     <>
       {status === STATUS.PERFECT ? (
@@ -55,6 +51,7 @@ const SideStatus = ({ status }) => {
           <ReactSVG src={ProcessIcon} />
         </Container>
       )}
+      <FillWater onClick={waterHandler}>Watering Plant</FillWater>
     </>
   );
 };
