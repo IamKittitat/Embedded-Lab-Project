@@ -36,10 +36,10 @@ function App() {
   function onMessage(message) {
     const [lightIntensity, temperature, humidity, soilMoisture, waterStatus] =
       message.payloadString.split('|');
-    setSoilMoisture(convertSoilMoisture(soilMoisture));
+    setSoilMoisture(convertSoilMoisture(parseFloat(soilMoisture)));
     setHumidity(parseFloat(humidity));
     setTemperature(parseFloat(temperature));
-    setLightIntensity(convertLightIntensity(lightIntensity));
+    setLightIntensity(convertLightIntensity(parseFloat(lightIntensity)));
 
     if (waterStatus === '1') {
       setStatus(STATUS.PROCESS);
