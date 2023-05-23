@@ -39,15 +39,6 @@ const Data = styled.p`
   color: ${COLORS.white};
 `;
 
-const Unit = styled.p`
-  position: relative;
-  top: 80px;
-  left: 150px;
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 36px;
-`;
-
 const Name = styled.p`
   font-size: 30px;
   font-weight: 700;
