@@ -27,7 +27,7 @@ function App() {
   }
 
   function convertSoilMoisture(read) {
-    const moisturePercentage = ((read - 700) * 100) / 420;
+    const moisturePercentage = ((read - 4700) * 100) / (1100 - 4700);
     if (moisturePercentage >= 100) return 100;
     if (moisturePercentage <= 0) return 0;
     return moisturePercentage;
@@ -36,12 +36,10 @@ function App() {
   function onMessage(message) {
     const [lightIntensity, temperature, humidity, soilMoisture, waterStatus] =
       message.payloadString.split('|');
-    setSoilMoisture(convertSoilMoisture(parseFloat(soilMoisture)).toFixed(2));
-    setHumidity(parseFloat(humidity).toFixed(2));
-    setTemperature(parseFloat(temperature).toFixed(2));
-    setLightIntensity(
-      convertLightIntensity(parseFloat(lightIntensity)).toFixed(2),
-    );
+    setSoilMoisture(convertSoilMoisture(parseFloat(soilMoisture)));
+    setHumidity(parseFloat(humidity));
+    setTemperature(parseFloat(temperature));
+    setLightIntensity(convertLightIntensity(parseFloat(lightIntensity)));
 
     if (waterStatus === '1') {
       setStatus(STATUS.PROCESS);
@@ -49,8 +47,7 @@ function App() {
       if (
         41 <= soilMoisture <= 80 &&
         60 <= humidity <= 80 &&
-        24 <= temperature <= 43 &&
-        lightIntensity >= 60000
+        24 <= temperature <= 43
       ) {
         setStatus(STATUS.PERFECT);
       } else {
