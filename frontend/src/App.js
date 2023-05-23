@@ -34,21 +34,29 @@ function App() {
   }
 
   function onMessage(message) {
-    const [lightIntensity, temperature, humidity, soilMoisture, waterStatus] =
+    let [lightData, tempData, humidData, soilData, waterStatus] =
       message.payloadString.split('|');
-    setSoilMoisture(convertSoilMoisture(parseFloat(soilMoisture)));
-    setHumidity(parseFloat(humidity));
-    setTemperature(parseFloat(temperature));
-    setLightIntensity(convertLightIntensity(parseFloat(lightIntensity)));
+    setSoilMoisture(convertSoilMoisture(parseFloat(soilData)));
+    setHumidity(parseFloat(humidData));
+    setTemperature(parseFloat(tempData));
+    setLightIntensity(convertLightIntensity(parseFloat(lightData)));
+    soilData = convertSoilMoisture(parseFloat(soilData));
+    humidData = parseFloat(humidData);
+    tempData = parseFloat(tempData);
+    lightData = convertLightIntensity(parseFloat(lightData));
 
     if (waterStatus === '1') {
       setStatus(STATUS.PROCESS);
     } else {
       if (
-        41 <= soilMoisture <= 80 &&
-        60 <= humidity <= 80 &&
-        24 <= temperature <= 43
+        41 <= soilData &&
+        soilData <= 80 &&
+        60 <= humidData &&
+        humidData <= 80 &&
+        24 <= tempData &&
+        tempData <= 43
       ) {
+        console.log('here');
         setStatus(STATUS.PERFECT);
       } else {
         setStatus(STATUS.WARNING);
