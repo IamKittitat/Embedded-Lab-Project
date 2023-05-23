@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import SideDetail from './SideDetail';
 import SideStatus from './SideStatus';
@@ -20,14 +20,14 @@ const Container = styled.div`
   height: 85vh;
 `;
 
-const SideBar = ({ status }) => {
+const SideBar = ({ status, client }) => {
   return (
     <Container status={status}>
       <SideDetail status={status} />
       {/* <SideDetail status={'Warning'} /> */}
       {/* <SideDetail status={'Perfect'} /> */}
       {/* <SideDetail status={'Processing'} /> */}
-      <SideStatus status={status} />
+      <SideStatus status={status} client={client} />
     </Container>
   );
 };

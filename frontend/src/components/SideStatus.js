@@ -32,9 +32,9 @@ const FillWater = styled.div`
   cursor: pointer;
 `;
 
-const SideStatus = ({ status }) => {
+const SideStatus = ({ status, client }) => {
   const waterHandler = () => {
-    alert('Watering Plant');
+    client.publish('@msg/command', 'water');
   };
   return (
     <>
